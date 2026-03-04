@@ -19,8 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-// Static files for resumes (protected in production, but accessible for now)
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Static files for resumes
+const uploadsPath = process.env.UPLOAD_PATH || path.join(__dirname, 'uploads/resumes');
+app.use('/uploads', express.static(uploadsPath));
 
 // Routes
 app.use('/api/placement-register', placementRoutes);

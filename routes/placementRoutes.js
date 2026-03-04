@@ -9,7 +9,7 @@ const { stringify } = require('csv-stringify');
 // Multer storage configuration
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, '../uploads/resumes');
+        const uploadPath = process.env.UPLOAD_PATH || path.join(__dirname, '../uploads/resumes');
         if (!fs.existsSync(uploadPath)) {
             fs.mkdirSync(uploadPath, { recursive: true });
         }
